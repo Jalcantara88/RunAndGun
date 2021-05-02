@@ -1,0 +1,16 @@
+{
+  "name": "run-and-gun-mintbean-hackathon-4-30-21",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Julio Alcantara <julio@deadheadstudio.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel serve index.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "phaser": "^3.54.0"
+  }
+}
