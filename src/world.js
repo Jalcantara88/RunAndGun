@@ -20,6 +20,7 @@ const world = {
   minWidth: 200,
   maxWidth: 600,
   randomCalc: false,
+  paused: false,
 };
 
 module.exports = world;

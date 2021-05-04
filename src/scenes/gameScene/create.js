@@ -10,11 +10,50 @@ module.exports = function create() {
   ************************************************/
 
   // Create Background 
+  /*
   this.background = this.add.tileSprite(0,0,width,height, "background")
     // set its origin
     .setOrigin(0)
     // set which way it scrolls
     .setScrollFactor(0,1);
+  */ 
+
+  this.sky = this.add.tileSprite(0,0,width,height, "sky")
+  // set its origin
+  .setOrigin(0)
+  // set which way it scrolls
+  .setScrollFactor(0,1);
+
+  this.clouds = this.add.tileSprite(0,0,width,height, "clouds")
+    // set its origin
+    .setOrigin(0)
+    // set which way it scrolls
+    .setScrollFactor(0,1);
+
+  this.mountains = this.add.tileSprite(0,0,width,height, "mountains")
+  // set its origin
+  .setOrigin(0)
+  // set which way it scrolls
+  .setScrollFactor(0,1);
+
+  this.trees = this.add.tileSprite(0,0,width,height, "trees")
+  // set its origin
+  .setOrigin(0)
+  // set which way it scrolls
+  .setScrollFactor(0,1);
+
+  
+  this.anims.create({
+    key: "stream",
+    frameRate: 7,
+    frames: this.anims.generateFrameNumbers("water", {start: 0, end: 3}),
+    repeat: -1,
+  });
+
+  var water = this.add.sprite(0,400, "water")
+    .setOrigin(0);
+
+  water.play("stream");
   
   /************************************************ 
   ***************** SCORE *************************
@@ -40,11 +79,21 @@ module.exports = function create() {
   player.body.immovable = false;
   player.body.setGravityY(500);
   
-  // create lava area
+  // create water area
+
+
+  /*
+  var water = this.add.sprite(0,600, "water")
+    .setOrigin(0);
+
+  var river = water.animations.add("river");
+
+  water.animatioins.play("river", 10, true);
+  
   const lava = this.add.lava(0, 500, 800, 100, 0xffff00);
   lava.displayOriginX = 0;
   lava.displayOriginY = 0;
-
+  */
 
  
   /************************************************ 
@@ -116,4 +165,10 @@ module.exports = function create() {
 
   // set walls
   //this.physics.world.setBounds(0, 0, width, height);
+
+  this.rocks = this.add.tileSprite(0,0,width,height, "rocks")
+  // set its origin
+  .setOrigin(0)
+  // set which way it scrolls
+  .setScrollFactor(0,1);
 };

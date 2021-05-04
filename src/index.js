@@ -4,6 +4,11 @@ const gameSceneCreate = require("./scenes/gameScene/create");
 const gameScenePreload = require("./scenes/gameScene/preload");
 const gameSceneUpdate = require("./scenes/gameScene/update");
 
+// load titleScene
+const titleSceneCreate = require("./scenes/titleScene/create");
+const titleScenePreload = require("./scenes/titleScene/preload");
+const titleSceneUpdate = require("./scenes/titleScene/update");
+
 // factories
 require("./objects/Ball.js");
 require("./objects/Bullet.js");
@@ -22,6 +27,11 @@ var titleScene = new Phaser.Scene("title");
 gameScene.preload = gameScenePreload;
 gameScene.create = gameSceneCreate;
 gameScene.update = gameSceneUpdate;
+
+// add scene files to titleScene
+titleScene.preload = titleScenePreload;
+titleScene.create = titleSceneCreate;
+titleScene.update = titleSceneUpdate;
 
 
 // game config 
@@ -53,6 +63,8 @@ var game = new Phaser.Game(config);
 
 // add scenes to Phaser game
 game.scene.add("game", gameScene);
+
+game.scene.add("title", titleScene);
 
 //set Phaser game starting scene
 game.scene.start("game");

@@ -6,8 +6,34 @@ const { width, height } = require("../../constants");
 
 module.exports = function update() {
   //score increase over time while game is active
-  if (world.isAlive) {
+  /*
+  var vKey = this.input.keyboard.addKey('V');
+
+  if (vKey.isDown) {
+    var pauseOnce = 0
+    if (pauseOnce < 1) {
+      world.paused = !world.paused;
+      pauseOnce = 1;
+    }
+    
+  }
+
+  if(vKey.isUp) {
+    pauseOnce = 0;
+  }
+
+  if (world.paused) {
+    return;
+  }
+
+  */
+
+  if (world.lives > 0) {
     world.distance += .1;
+  }
+
+  if (world.lives < 1) {
+    this.gameOver = true;
   }
 
   // update HUD text over time
@@ -19,7 +45,12 @@ module.exports = function update() {
 
 
   // set background scroll speed
-  this.background.tilePositionX += 0.5;
+  //this.background.tilePositionX += 0.5;
+  this.sky.tilePositionX += 0.1;
+  this.clouds.tilePositionX += 0.2;
+  this.mountains.tilePositionX += 0.3;
+  this.trees.tilePositionX += 1;
+  this.rocks.tilePositionX += 3;
 
   // get keyboard inputs
   const cursors = this.input.keyboard.createCursorKeys();

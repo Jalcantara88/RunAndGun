@@ -49,7 +49,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   // actions for on key presses being listened to in update
   left() {
-    this.anims.play("left", true);
+    this.anims.play("left");
     this.body.setVelocityX(-500);
     //this.body.setVelocityX(this.body.velocity.x - ACCELERATION);
   }
@@ -62,7 +62,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setVelocityX(200);
       }
       
-      this.anims.play("right", true);
+      this.anims.play("right");
     //this.body.setVelocityX(this.body.velocity.x + ACCELERATION);
   }
 
