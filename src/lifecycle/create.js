@@ -1,43 +1,85 @@
 const world = require("../world");
 const { width, height } = require("../constants");
+const { worldScrollSpeed } = require("../world");
+import "../objects/Player.js";
 
 module.exports = function create() {
 
+  /************************************************ 
+  ***************** BACKGROUND ********************
+  ************************************************/
+
+  // Create Background 
   this.background = this.add.tileSprite(0,0,width,height, "background")
+    // set its origin
     .setOrigin(0)
+    // set which way it scrolls
     .setScrollFactor(0,1);
-
   
+  /************************************************ 
+  ***************** SCORE *************************
+  ************************************************/  
+
+  world.scoreText = this.add.text(16,16, 'score: 0', {fontSize: "32px", fill: "#000"});
+
+  /************************************************ 
+  ***************** PLAYER ************************
+  ************************************************/
+
   // spawn player
-  const player = this.add.ball(300, 400, 30, 30, 0xffffff);
+  const player = this.add.newPlayer(300, 400);
+
+  // add player to world
   world.player = this.physics.add.existing(player);
+  //let outside forces effect player
   player.body.immovable = false;
-  player.body.setGravityY(300);
-  //player.pushable(true);
-
-  var groundArray = [];
-
+  player.body.setGravityY(500);
+  
+  // create lava area
   const lava = this.add.lava(0, 500, 800, 100, 0xffff00);
   lava.displayOriginX = 0;
   lava.displayOriginY = 0;
 
-  //console.log(world.width);
 
-  const ground = this.add.ground(300 , 550, 300, 200, 0x33ff00);
+ 
+  /************************************************ 
+  ***************** PLATFORMS *********************
+  ************************************************/
   
-  ground.displayOriginX = 0;
-  world.ground = this.physics.add.existing(ground);
-  //ground.setPushable(false);
-  ground.body.immovable = true;
-  ground.body.allowGravity = false;
+  // create platform group
+  let platforms = this.physics.add.group({immovable: true, allowGravity: false, velocityX: -300, moves: false});
 
-  this.physics.add.collider(player, ground, function(player) {
-    player.x -= 3;
-    //player.isJumping = false;
+  //this.physics.world.enable(platforms);
+
+  // create starting ground
+  const startPlatform = this.add.ground(300 , 550, 800, 200, 0x33ff00);
+
+  // set ground pivot to left of object
+  startPlatform.displayOriginX = 0;
+
+  //add platforms group to world
+  world.ground = platforms;
+
+  //add ground to platformGroup
+  world.ground.add(startPlatform);
+
+  //player to platforms collider
+  this.physics.add.collider(player, platforms, function(player) {
+    
+    player.x -= worldScrollSpeed;
+    player.jumpTimer = 0;
+    
   });
+
   
 
-  // set target
+  /************************************************ 
+  ***************** ENEMY *********************
+  ************************************************/
+
+
+  /*
+  // spawn enemy
   const target = this.add.ball(
     Math.random() * width,
     Math.random() * height,
@@ -45,17 +87,29 @@ module.exports = function create() {
     30,
     0xff0000
   );
-
   world.target = this.physics.add.existing(target);
   target.body.setVelocityX(Math.random() * 1000);
   target.body.setVelocityY(Math.random() * 500);
-  target.body.setImmovable(false);
+  target.body.immovable = false;
 
-  this.physics.add.collider(target, ground);
+  // enemy, ground collider
+  this.physics.add.collider(target, world.ground, function(target) {
+    //var velocity = target.body.velocity;
+
+    //if (velocity.x === 0) velocity.x = 0.001;
+    target.x -= worldScrollSpeed;
+  });
 
   //world.ground - this.physics.add.existing(ground);
   //ground.body.setVelocityX(Math.random() * 1000);
   //ground.body.setVelocityY(Math.random() * 500);
+  */
+
+
+
+  /************************************************ 
+  ******************* WORLD ***********************
+  ************************************************/
 
   // set walls
   this.physics.world.setBounds(0, 0, width, height);

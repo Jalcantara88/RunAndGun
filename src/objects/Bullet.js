@@ -1,7 +1,7 @@
 const Phaser = require("phaser");
 //const { player } = require("../world");
 
-const LIFESPAN = 500;
+const LIFESPAN = 1000;
 const SPEED = 1500;
 class Bullet extends Phaser.GameObjects.Ellipse {
   constructor(scene, player, pointer) {
@@ -15,8 +15,6 @@ class Bullet extends Phaser.GameObjects.Ellipse {
       player.bulletsNum--;
     }, LIFESPAN);
     scene.add.existing(this);
-
-    //console.log(player.bulletsNum);
   }
 
   // For some reason, Phaser needs this empty method.
@@ -31,6 +29,7 @@ class Bullet extends Phaser.GameObjects.Ellipse {
   }
 }
 
+// export bullet for use in game
 Phaser.GameObjects.GameObjectFactory.register("bullet", function (...args) {
   const bullet = new Bullet(this.scene, ...args);
 

@@ -3,6 +3,7 @@ const Phaser = require("phaser");
 
 const ACCELERATION = 40;
 class Ball extends Phaser.GameObjects.Ellipse {
+  // ball varables
   constructor(scene, ...args) {
     super(scene, ...args);
     this.initialized = false;
@@ -11,7 +12,19 @@ class Ball extends Phaser.GameObjects.Ellipse {
     this.maxBullets = 3;
     this.isShooting = false;
     this.isJumping = false;
+    this.jumpTimer = 0;
+    
   }
+
+  /*
+  tick() {
+    if (this.power < 1) {
+      this.body.setVelocityY(this.body.velocity.y - ACCELERATION);
+      //this.power += .1;
+      //console.log(this.power);
+    }
+  }
+  */
 
   // For some reason, Phaser needs this empty method.
   preUpdate() {
@@ -21,17 +34,38 @@ class Ball extends Phaser.GameObjects.Ellipse {
     }
   }
 
+  // actions for on key presses being listened to in update
   left() {
-    this.body.setVelocityX(this.body.velocity.x - ACCELERATION);
+    this.body.x += 1;
+    //this.body.setVelocityX(this.body.velocity.x - ACCELERATION);
   }
 
   right() {
     this.body.setVelocityX(this.body.velocity.x + ACCELERATION);
   }
 
-  up() {
+  jump() {
+    /*
+    this.timer = Phaser.Time.TimerEventConfig({
+      delay: 50,
+      callback: this.tick,
+      callbackScope: this,
+      loop: true 
+    })
+    */
     this.body.setVelocityY(this.body.velocity.y - ACCELERATION);
+    //this.isJumping = true;
   }
+/*
+  endJump() {
+    if (this.timer) {
+      this.timer.remove();
+      this.body.setVelocityY(this.power * 100);
+      this.power = 0;
+    }
+    
+  }
+  */
 
   down() {
     this.body.setVelocityY(this.body.velocity.y + ACCELERATION);
@@ -48,6 +82,7 @@ class Ball extends Phaser.GameObjects.Ellipse {
   }
 }
 
+// export ball to game for use
 Phaser.GameObjects.GameObjectFactory.register("ball", function (...args) {
   const ball = new Ball(this.scene, ...args);
 
