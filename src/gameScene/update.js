@@ -1,13 +1,18 @@
-const world = require("../world");
+const world = require("../../world");
 const Phaser = require("Phaser");
-const { width, height } = require("../constants");
+const { width, height } = require("../../constants");
 
 //const ACCELERATION = 50;
 
 module.exports = function update() {
   //score increase over time
-  world.score += .1;
-  world.scoreText.setText("Score: " + Math.round(world.score));
+  world.distance += .1;
+  world.distanceText.setText("Distance: " + Math.round(world.distance));
+
+  world.livesText.setText("Lives: " + world.lives);
+
+  world.killsText.setText("kills: " + world.kills);
+
 
   // set background scroll speed
   this.background.tilePositionX += 0.5;
@@ -35,17 +40,40 @@ module.exports = function update() {
     player.right();
   }
 
-  if (up.isDown && player.body.touching.down) {
+  
+  
+  if (up.isDown && player.isJumping) {
     player.jumpTimer += .1;
-    if(player.jumpTimer < 50) {
-    //player.touchingDown();
-    player.jump();
+    if (player.jumpTimer < 3) {
+      player.jump();
+      player.acceleration -= .5;
+    }
+    if (player.jumpTimer === 3) {
+      player.jumpTimer = 0
+      player.isJumping = false;
+      
     }
   }
+  
+
+  if (up.isDown && player.body.touching.down) {
+    //player.jumpTimer += .1;
+    player.isJumping = true;
+    //player.touchingDown();
+    //player.jump();
+    
+  }
+
+  if(up.isUp) {
+    player.isJumping = false;
+    player.acceleration = 40;
+  }
+  
 
   if (player.body.touching.down && left.isUp && right.isUp && up.isUp) {
     //console.log(world.ground);
     player.turn();
+    //player.jumpTimer = 0;
     //debugger;
   }
 
@@ -96,6 +124,8 @@ module.exports = function update() {
     player.y = 0;
     player.setActive(true).setVisible(true);
     world.ground.velocityX = -300;
+
+    world.lives -= 1;
   }
   
   // ground platforms move speed

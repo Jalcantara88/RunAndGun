@@ -1,7 +1,7 @@
-const world = require("../world");
-const { width, height } = require("../constants");
-const { worldScrollSpeed } = require("../world");
-import "../objects/Player.js";
+const world = require("../../world");
+const { width, height } = require("../../constants");
+const { worldScrollSpeed } = require("../../world");
+import "../../objects/Player.js";
 
 module.exports = function create() {
 
@@ -20,7 +20,12 @@ module.exports = function create() {
   ***************** SCORE *************************
   ************************************************/  
 
-  world.scoreText = this.add.text(16,16, 'score: 0', {fontSize: "32px", fill: "#000"});
+  world.distanceText = this.add.text(16,16, 'Distance: 0', {fontSize: "32px", fill: "#000"});
+  world.livesText = this.add.text(330, 16, 'Lives: 3', {fontSize: "32px", fill: "#000"} )
+  world.killsText = this.add.text(550, 16, 'Kills: 0', {fontSize: "32px", fill: "#000"} )
+
+
+
 
   /************************************************ 
   ***************** PLAYER ************************
@@ -103,11 +108,6 @@ module.exports = function create() {
     target.x -= worldScrollSpeed;
   });
 
-  //world.ground - this.physics.add.existing(ground);
-  //ground.body.setVelocityX(Math.random() * 1000);
-  //ground.body.setVelocityY(Math.random() * 500);
-  */
-
 
 
   /************************************************ 
@@ -115,5 +115,5 @@ module.exports = function create() {
   ************************************************/
 
   // set walls
-  this.physics.world.setBounds(0, 0, width, height);
+  //this.physics.world.setBounds(0, 0, width, height);
 };

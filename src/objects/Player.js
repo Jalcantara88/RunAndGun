@@ -34,18 +34,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
           frameRate: 10,
           repeat: -1
       });
+      this.acceleration = 40;
     
   }
 
-  /*
-  tick() {
-    if (this.power < 1) {
-      this.body.setVelocityY(this.body.velocity.y - ACCELERATION);
-      //this.power += .1;
-      //console.log(this.power);
-    }
-  }
-  */
 
   // For some reason, Phaser needs this empty method.
   preUpdate() {
@@ -57,8 +49,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   // actions for on key presses being listened to in update
   left() {
-    this.body.setVelocityX(-300);
     this.anims.play("left", true);
+    this.body.setVelocityX(-500);
     //this.body.setVelocityX(this.body.velocity.x - ACCELERATION);
   }
 
@@ -75,35 +67,25 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   turn() {
-    //let groundVelocity = world.ground.defaults.setVelocityX;
-    //console.log("ground velocity " + groundVelocity);
-    
     //this.body.setVelocityX(groundVelocity);
     this.body.setVelocityX(-120);
     //console.log("player velocity " + this.body.velocity.x);
     this.anims.play("turn");
-
   }
 
   
   jump() {
-    /*
-    this.timer = Phaser.Time.TimerEventConfig({
-      delay: 50,
-      callback: this.tick,
-      callbackScope: this,
-      loop: true 
-    })
-    */
-    this.body.setVelocityY(-800 - ACCELERATION);
-    //this.body.setVelocityY(this.body.velocity.y - ACCELERATION);
-    //this.isJumping = true;
+    this.y -= 5;
+    //this.body.setVelocityY(-ACCELERATION);
+    this.body.setVelocityY(this.body.velocity.y - this.acceleration);
   }
 
 
+  /*
   down() {
     this.body.setVelocityY(this.body.velocity.y + ACCELERATION);
   }
+  */
 
   shoot(target) {
     if(this.bulletsNum < this.maxBullets) {

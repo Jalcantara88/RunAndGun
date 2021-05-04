@@ -1,6 +1,6 @@
 const { Game } = require("phaser");
-import bg from '../assets/bg.png';
-import dude from '../assets/dude.png';
+import bg from '../../assets/bg.png';
+import dude from '../../assets/dude.png';
 
 
 module.exports = function preload() {
@@ -10,5 +10,5 @@ module.exports = function preload() {
 
     this.load.spritesheet("dude", dude, { frameWidth: 32, frameHeight: 48});
 
-    var scoreText;
+    
 };
