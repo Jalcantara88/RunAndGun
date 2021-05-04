@@ -57,7 +57,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   // actions for on key presses being listened to in update
   left() {
-    this.body.setVelocityX(-160);
+    this.body.setVelocityX(-300);
     this.anims.play("left", true);
     //this.body.setVelocityX(this.body.velocity.x - ACCELERATION);
   }
@@ -75,12 +75,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
   }
 
   turn() {
-    let groundVelocity = world.ground.defaults.setVelocityX;
-    console.log("ground velocity " + groundVelocity);
+    //let groundVelocity = world.ground.defaults.setVelocityX;
+    //console.log("ground velocity " + groundVelocity);
     
     //this.body.setVelocityX(groundVelocity);
-    this.body.setVelocityX(-140);
-    console.log("player velocity " + this.body.velocity.x);
+    this.body.setVelocityX(-120);
+    //console.log("player velocity " + this.body.velocity.x);
     this.anims.play("turn");
 
   }

@@ -71,6 +71,9 @@ module.exports = function create() {
     
   });
 
+  world.nextGap = Math.floor(Math.random() * (world.maxGap - world.minGap +1)) + world.minGap ;
+
+
   
 
   /************************************************ 

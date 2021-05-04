@@ -8,9 +8,16 @@ const world = {
   maxGroundGap: 300,
   lives: 3,
   score: 0,
-  maxGap: 100,
+  minGap: 200,
+  maxGap: 500,
+  nextGap: 0,
   frontPlatform: undefined,
   currentGap: 0,
+  minHeight: 300,
+  maxHeight: 500,
+  minWidth: 200,
+  maxWidth: 600,
+  randomCalc: false,
 };
 
 module.exports = world;
