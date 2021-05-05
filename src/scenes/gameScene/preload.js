@@ -7,6 +7,7 @@ import trees from '../../assets/bg/trees.png';
 import rocks from '../../assets/bg/rocks.png';
 import dude from '../../assets/dude.png';
 import water from '../../assets/water/water.png';
+import bgMusic from '../../assets/music/gameplay.mp3';
 
 
 module.exports = function preload() {
@@ -27,6 +28,8 @@ module.exports = function preload() {
     this.load.spritesheet("dude", dude, { frameWidth: 32, frameHeight: 48});
 
     this.load.spritesheet("water", water, { frameWidth: 800, frameHeight: 200});
+
+    this.load.audio("bgMusic", bgMusic);
 
     
 };

@@ -70,4 +70,4 @@ game.scene.add("game", gameScene);
 
 
 //set Phaser game starting scene
-game.scene.start("game");
+game.scene.start("title");

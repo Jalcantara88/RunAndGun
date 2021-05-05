@@ -15,6 +15,7 @@ const world = {
   maxGap: 450,
   nextGap: 0,
   frontPlatform: undefined,
+  frontEnemy: undefined,
   currentGap: 0,
   minHeight: 300,
   maxHeight: 500,

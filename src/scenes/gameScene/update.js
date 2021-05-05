@@ -112,24 +112,32 @@ module.exports = function update() {
   // lava death bounds
   if ((player.y > 500 || (player.x + player.width / 2) < 0) && player.active) {
     //player.destroy();
-    player.setActive(false).setVisible(false);
-    console.log("you Died in Lava");
-    player.x = (width/2);
-    player.y = 0;
-    player.setActive(true).setVisible(true);
-    world.ground.velocityX = -300;
 
     world.lives -= 1;
+
+    setTimeout(() => {
+      player.setActive(false).setVisible(false);
+      console.log("you Died in Lava");
+      player.x = (width/2);
+      player.y = 0;
+      player.setActive(true).setVisible(true);
+      //world.ground.velocityX = -300;
+    }, 1000);
+
+
   }
 
+  if ( world.frontEnemy) {
+    if(world.frontEnemy.x < outerLeft || world.frontEnemy.y > 500) {
+      console.log("removing enemy");
   
-  var frontEnemy = world.enemies.children.entries[0];
-
-  if(frontEnemy.x < outerLeft || frontEnemy.y > 500) {
-    console.log("removing enemy");
-
-    world.enemies.children.entries.shift();
+      world.enemies.children.entries.shift();
+    }
   }
+  
+  world.frontEnemy = world.enemies.children.entries[0];
+
+
 
   //create array from platform group
   let platformArray = world.ground.children.entries;
@@ -218,6 +226,6 @@ module.exports = function update() {
 
   }
   */
-  frontEnemy.shoot(player);
+  //frontEnemy.shoot(player);
   
 };

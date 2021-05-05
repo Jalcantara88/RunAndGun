@@ -5,6 +5,9 @@ const { worldScrollSpeed } = require("../../world");
 
 module.exports = function create() {
 
+  this.bgMusic = this.sound.add('bgMusic', { volume: 0.5, loop: true });
+  this.bgMusic.play();
+
   /************************************************ 
   ***************** BACKGROUND ********************
   ************************************************/
@@ -154,6 +157,9 @@ module.exports = function create() {
   target.collideWorlBounds = false;
 
   world.enemies.add(target);
+
+  world.frontEnemy = world.enemies.children.entries[0];
+
   
   console.log(world.enemies);
   this.physics.add.collider(enemies, platforms, function(enemies) {
