@@ -9,7 +9,6 @@ const world = {
   maxGroundGap: 300,
   lives: 3,
   distance: 0,
-  isAlive: true,
   kills: 0,
   minGap: 200,
   maxGap: 450,

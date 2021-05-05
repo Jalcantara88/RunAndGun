@@ -33,7 +33,10 @@ module.exports = function update() {
   }
 
   if (world.lives < 1) {
-    this.gameOver = true;
+    this.bgMusic.stop();
+    //this.scene.remove("game");
+    this.scene.start("gameOver");
+    //this.gameOver = true;
   }
 
   // update HUD text over time
@@ -67,11 +70,15 @@ module.exports = function update() {
 
   // on event: left arrow
   if (left.isDown) {
+    player.anims.play('leftWalk',true);
+
     player.left();
   }
 
   // on event: right arrow
   if (right.isDown) {
+    player.anims.play('rightWalk',true);
+
     player.right();
   }
 
@@ -109,27 +116,28 @@ module.exports = function update() {
     //debugger;
   }
 
-  // lava death bounds
+  // death bounds
   if ((player.y > 500 || (player.x + player.width / 2) < 0) && player.active) {
     //player.destroy();
 
     world.lives -= 1;
 
-    setTimeout(() => {
+    //setTimeout(() => {
+      world.die.play();
       player.setActive(false).setVisible(false);
-      console.log("you Died in Lava");
+      //console.log("you Drowned");
       player.x = (width/2);
       player.y = 0;
       player.setActive(true).setVisible(true);
       //world.ground.velocityX = -300;
-    }, 1000);
+    //}, 1000);
 
 
   }
 
   if ( world.frontEnemy) {
     if(world.frontEnemy.x < outerLeft || world.frontEnemy.y > 500) {
-      console.log("removing enemy");
+      //console.log("removing enemy");
   
       world.enemies.children.entries.shift();
     }
@@ -154,8 +162,7 @@ module.exports = function update() {
   // remove front platform when reaching outer bounds
   if (world.frontPlatform.x < outerLeft) {
     world.ground.children.entries.shift();
-    //ground.destroy();
-    console.log("ground destroyed");
+    //console.log("ground destroyed");
   }
 
   // when platform gap to game bounds reaches limit, create new platform and recalculate next random values
@@ -190,16 +197,16 @@ module.exports = function update() {
       0xff0000
       
     );
-    //newEnemy.body.setVelocityX(-120);
-    console.log("new enemy created");
+
+    //console.log("new enemy created");
 
     world.enemies.add(newEnemy);
 
     //console.log(world.ground.children.entries);
 
-    //world.currentGap = 0;
+
     //debugger;
-    //world.randomCalc = false;
+
   }
 
   // handle onclick shoot

@@ -15,10 +15,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.isShooting = false;
     this.isJumping = false;
     this.jumpTimer = 0;
+    
+    /*
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 10,
+        frameRate: 5,
         repeat: -1
       });
     
@@ -31,9 +33,11 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.anims.create({
           key: 'right',
           frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-          frameRate: 10,
+          frameRate: 5,
           repeat: -1
       });
+      */
+
       this.acceleration = 40;
     
   }
@@ -49,7 +53,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
 
   // actions for on key presses being listened to in update
   left() {
-    this.anims.play("left");
+    //this.anims.play("leftWalk", true);
     this.body.setVelocityX(-500);
     //this.body.setVelocityX(this.body.velocity.x - ACCELERATION);
   }
@@ -62,7 +66,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
         this.body.setVelocityX(200);
       }
       
-      this.anims.play("right");
+      //this.anims.play("rightWalk", true);
     //this.body.setVelocityX(this.body.velocity.x + ACCELERATION);
   }
 
@@ -70,11 +74,12 @@ export default class Player extends Phaser.GameObjects.Sprite {
     //this.body.setVelocityX(groundVelocity);
     this.body.setVelocityX(-120);
     //console.log("player velocity " + this.body.velocity.x);
-    this.anims.play("turn");
+    this.anims.play("turn", true);
   }
 
   
   jump() {
+    //world.jump.play();
     this.y -= 5;
     //this.body.setVelocityY(-ACCELERATION);
     this.body.setVelocityY(this.body.velocity.y - this.acceleration);
@@ -90,7 +95,9 @@ export default class Player extends Phaser.GameObjects.Sprite {
   shoot(target) {
     if(this.bulletsNum < this.maxBullets) {
       const bullet = this.scene.add.bullet(this, target);
-      this.scene.physics.add.existing(bullet);
+      //this.scene.physics.add.existing(bullet);
+      world.shoot.play();
+      world.bullets.add(bullet)
       this.bulletsNum++;
       // const bullet = this.scene.add.bullet(this.x, this.y, x, y);
     }
