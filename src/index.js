@@ -14,6 +14,8 @@ require("./objects/Ball.js");
 require("./objects/Bullet.js");
 require("./objects/Ground.js");
 require("./objects/Lava.js");
+require("./objects/Player.js");
+require("./objects/EnemyBullet.js");
 
 // constants
 const { width, height } = require("./constants");
@@ -62,9 +64,10 @@ var config = {
 var game = new Phaser.Game(config);
 
 // add scenes to Phaser game
+game.scene.add("title", titleScene);
 game.scene.add("game", gameScene);
 
-game.scene.add("title", titleScene);
+
 
 //set Phaser game starting scene
 game.scene.start("game");

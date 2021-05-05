@@ -122,6 +122,15 @@ module.exports = function update() {
     world.lives -= 1;
   }
 
+  
+  var frontEnemy = world.enemies.children.entries[0];
+
+  if(frontEnemy.x < outerLeft || frontEnemy.y > 500) {
+    console.log("removing enemy");
+
+    world.enemies.children.entries.shift();
+  }
+
   //create array from platform group
   let platformArray = world.ground.children.entries;
   
@@ -153,6 +162,9 @@ module.exports = function update() {
     //console.log("next width is " + nextWidth);
     //console.log("next gap is " + nextGap);
 
+   
+
+
     //world.ground.children.entries[world.ground.children.entries.length] = this.add.ground(300 , 550, 800, 200, 0x33ff00);
     let newPlatform = this.add.ground(width , nextHeight, nextWidth, 100, 0x33ff00);
 
@@ -161,6 +173,19 @@ module.exports = function update() {
 
     //add ground to platformGroup
     world.ground.add(newPlatform);
+
+    const newEnemy = this.add.ball(
+      (Math.random() * newPlatform.width) + width,
+      (Math.random() * newPlatform.height) + 50,
+      30,
+      30,
+      0xff0000
+      
+    );
+    //newEnemy.body.setVelocityX(-120);
+    console.log("new enemy created");
+
+    world.enemies.add(newEnemy);
 
     //console.log(world.ground.children.entries);
 
@@ -180,10 +205,19 @@ module.exports = function update() {
   });
 
   // handle offclick shoot
-  this.input.on("pointerup", function (pointer) {
+  this.input.on("pointerup", function () {
     if(player.isShooting) {
       player.isShooting = false;
     }
   });
+
+  /*
+  if(world.enemies.children.entries){
+    console.log(world.enemies);
+    debugger;
+
+  }
+  */
+  frontEnemy.shoot(player);
   
 };

@@ -1,7 +1,7 @@
 const world = require("../../world");
 const { width, height } = require("../../constants");
 const { worldScrollSpeed } = require("../../world");
-import "../../objects/Player.js";
+//import "../../objects/Player.js";
 
 module.exports = function create() {
 
@@ -134,8 +134,14 @@ module.exports = function create() {
   ***************** ENEMY *********************
   ************************************************/
 
+  let enemies = this.physics.add.group({immovable: false, allowGravity: true, velocityX: -300, moves: false});
 
-  /*
+
+  world.enemies = enemies;
+
+  
+
+  
   // spawn enemy
   const target = this.add.ball(
     Math.random() * width,
@@ -144,6 +150,19 @@ module.exports = function create() {
     30,
     0xff0000
   );
+  
+  target.collideWorlBounds = false;
+
+  world.enemies.add(target);
+  
+  console.log(world.enemies);
+  this.physics.add.collider(enemies, platforms, function(enemies) {
+    //console.log("enemy ground collide");
+    //enemies.x -= 5;
+    //player.jumpTimer = 0;
+    
+  });
+ /*
   world.target = this.physics.add.existing(target);
   target.body.setVelocityX(Math.random() * 1000);
   target.body.setVelocityY(Math.random() * 500);
@@ -164,7 +183,7 @@ module.exports = function create() {
   ************************************************/
 
   // set walls
-  //this.physics.world.setBounds(0, 0, width, height);
+  //this.physics.world.setBounds(10, 10, width - 20, height - 20);
 
   this.rocks = this.add.tileSprite(0,0,width,height, "rocks")
   // set its origin

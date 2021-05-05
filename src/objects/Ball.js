@@ -7,12 +7,12 @@ class Ball extends Phaser.GameObjects.Ellipse {
   constructor(scene, ...args) {
     super(scene, ...args);
     this.initialized = false;
-    scene.add.existing(this);
-    this.bulletsNum = 0;
-    this.maxBullets = 3;
-    this.isShooting = false;
-    this.isJumping = false;
-    this.jumpTimer = 0;
+    //scene.add.existing(this);
+    //this.bulletsNum = 0;
+    //this.maxBullets = 3;
+    //this.isShooting = false;
+    //this.isJumping = false;
+    //this.jumpTimer = 0;
     
   }
 
@@ -29,8 +29,8 @@ class Ball extends Phaser.GameObjects.Ellipse {
   // For some reason, Phaser needs this empty method.
   preUpdate() {
     if (!this.initialized) {
-      this.body.collideWorldBounds = true;
-      this.body.bounce.setTo(0, 0);
+      //this.body.collideWorldBounds = true;
+      //this.body.bounce.setTo(0, 0);
     }
   }
 

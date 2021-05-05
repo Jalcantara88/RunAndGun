@@ -2,6 +2,7 @@ const world = {
   player: undefined,
   cpu: [],
   ground: undefined,
+  enemies: undefined,
   worldScrollSpeed: 3,
   maxGroundHeight: 200,
   maxGroundWidth: 400,
