@@ -1,9 +1,8 @@
 const Phaser = require("phaser");
 const world = require("../world");
-//const { player } = require("../world");
 
 const ACCELERATION = 40;
-export default class Player extends Phaser.GameObjects.Sprite {
+class Player extends Phaser.GameObjects.Sprite {
   // player varables
   constructor(scene, x, y) {
     super(scene, x, y, "dude");
@@ -15,33 +14,8 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.isShooting = false;
     this.isJumping = false;
     this.jumpTimer = 0;
-    
-    /*
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-        frameRate: 5,
-        repeat: -1
-      });
-    
-      this.anims.create({
-          key: 'turn',
-          frames: [ { key: 'dude', frame: 4 } ],
-          frameRate: 20
-      });
-    
-      this.anims.create({
-          key: 'right',
-          frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-          frameRate: 5,
-          repeat: -1
-      });
-      */
-
-      this.acceleration = 40;
-    
+    this.acceleration = 40; 
   }
-
 
   // For some reason, Phaser needs this empty method.
   preUpdate() {

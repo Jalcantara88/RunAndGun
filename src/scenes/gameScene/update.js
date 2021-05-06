@@ -1,54 +1,44 @@
 const world = require("../../world");
 const Phaser = require("Phaser");
 const { width, height } = require("../../constants");
+const { Game } = require("phaser");
 
 //const ACCELERATION = 50;
 
 module.exports = function update() {
-  //score increase over time while game is active
-  /*
-  var vKey = this.input.keyboard.addKey('V');
 
-  if (vKey.isDown) {
-    var pauseOnce = 0
-    if (pauseOnce < 1) {
-      world.paused = !world.paused;
-      pauseOnce = 1;
-    }
-    
-  }
 
-  if(vKey.isUp) {
-    pauseOnce = 0;
-  }
 
-  if (world.paused) {
-    return;
-  }
+  /************************************************ 
+  ******************* WORLD ***********************
+  ************************************************/
 
-  */
 
+
+  // while alive, increase distance
   if (world.lives > 0) {
     world.distance += .1;
   }
 
+  // end game if lives less than 1
   if (world.lives < 1) {
+    // stop music
     this.bgMusic.stop();
-    //this.scene.remove("game");
+
+    // start next scene
     this.scene.start("gameOver");
-    //this.gameOver = true;
   }
 
   // update HUD text over time
   world.distanceText.setText("Distance: " + Math.round(world.distance));
 
+  // update lives
   world.livesText.setText("Lives: " + world.lives);
 
+  // update kills
   world.killsText.setText("kills: " + world.kills);
 
-
-  // set background scroll speed
-  //this.background.tilePositionX += 0.5;
+  // set background scroll speed off parallax bg
   this.sky.tilePositionX += 0.1;
   this.clouds.tilePositionX += 0.2;
   this.mountains.tilePositionX += 0.3;
@@ -58,15 +48,19 @@ module.exports = function update() {
   // get keyboard inputs
   const cursors = this.input.keyboard.createCursorKeys();
   
-  //pull specific keys from all keyboard inputs variable
+  // pull specific keys from all keyboard inputs variable
   const { left, right, up, down } = cursors;
 
-  //pull variables from world.js
+  // pull player from world.js
   const { player } = world;
-  const { ground } = world;
-  const { worldScrollSpeed } = world;
 
-  // key press listeners
+
+
+  /************************************************ 
+  ****************** CONTROLS *********************
+  ************************************************/
+
+
 
   // on event: left arrow
   if (left.isDown) {
@@ -95,13 +89,12 @@ module.exports = function update() {
       player.isJumping = false;
     }
   }
+
   // start jump
   if (up.isDown && player.body.touching.down) {
-    //player.jumpTimer += .1;
     player.isJumping = true;
-    //player.touchingDown();
-    //player.jump();
   }
+
   // release jump
   if(up.isUp) {
     player.isJumping = false;
@@ -110,42 +103,40 @@ module.exports = function update() {
   
   // on event: land
   if (player.body.touching.down && left.isUp && right.isUp && up.isUp) {
-    //console.log(world.ground);
     player.turn();
-    //player.jumpTimer = 0;
-    //debugger;
   }
 
-  // death bounds
-  if ((player.y > 500 || (player.x + player.width / 2) < 0) && player.active) {
-    //player.destroy();
 
+
+  /************************************************ 
+  ***************** KILL ZONES ********************
+  ************************************************/
+
+  // kill player
+  if ((player.y > 500 || (player.x + player.width / 2) < 0) && player.active) {
+
+    // remove a life
     world.lives -= 1;
 
-    //setTimeout(() => {
-      world.die.play();
-      player.setActive(false).setVisible(false);
-      //console.log("you Drowned");
-      player.x = (width/2);
-      player.y = 0;
-      player.setActive(true).setVisible(true);
-      //world.ground.velocityX = -300;
-    //}, 1000);
+    // play death sound
+    world.die.play();
 
-
+    // reset player position to top of screen
+    player.setActive(false).setVisible(false);
+    player.x = (width/2);
+    player.y = 0;
+    player.setActive(true).setVisible(true);
   }
 
+  // kill enemy
   if ( world.frontEnemy) {
-    if(world.frontEnemy.x < outerLeft || world.frontEnemy.y > 500) {
-      //console.log("removing enemy");
-  
+    if(world.frontEnemy.x < -20 || world.frontEnemy.y > 500) {
       world.enemies.children.entries.shift();
     }
   }
   
+  // kill front enemy
   world.frontEnemy = world.enemies.children.entries[0];
-
-
 
   //create array from platform group
   let platformArray = world.ground.children.entries;
@@ -162,52 +153,65 @@ module.exports = function update() {
   // remove front platform when reaching outer bounds
   if (world.frontPlatform.x < outerLeft) {
     world.ground.children.entries.shift();
-    //console.log("ground destroyed");
   }
 
+
+
+  /************************************************ 
+  ***************** BIRTH ZONES *******************
+  ************************************************/
+
+
+
   // when platform gap to game bounds reaches limit, create new platform and recalculate next random values
-  if ( (width - (world.backPlatform.x + world.backPlatform.width)) > world.nextGap) {
-    world.nextGap = Math.floor(Math.random() * (world.maxGap - world.minGap +1)) + world.minGap ;
+  if ((width - (world.backPlatform.x + world.backPlatform.width)) > world.nextGap) {
 
+    // calculate next random gap
+    world.nextGap = Math.floor(Math.random() * (world.maxGap - world.minGap +1)) + world.minGap;
 
+    // calculate next random height
     var nextHeight = Math.floor(Math.random() * (world.maxHeight - world.minHeight +1)) + world.minHeight;
-    //console.log("next height is " + nextHeight);
 
+    // calculate next random width
     var nextWidth = Math.floor(Math.random() * (world.maxWidth - world.minWidth +1)) + world.minWidth;
-    //console.log("next width is " + nextWidth);
-    //console.log("next gap is " + nextGap);
 
-   
+    // create new platform with random values
+    let newPlatform = this.add.image(width, nextHeight, "platform");
+    newPlatform.width = nextWidth;
+    newPlatform.displayWidth = nextWidth;
 
-
-    //world.ground.children.entries[world.ground.children.entries.length] = this.add.ground(300 , 550, 800, 200, 0x33ff00);
-    let newPlatform = this.add.ground(width , nextHeight, nextWidth, 100, 0x33ff00);
-
-     // set ground pivot to left of object
+    // set ground pivot to left of object
     newPlatform.displayOriginX = 0;
 
-    //add ground to platformGroup
+    // add ground to platformGroup
     world.ground.add(newPlatform);
 
+    // create new enemy and randomly place on new platform
+    const newEnemy = this.add.ball((Math.random() * newPlatform.width) + width,
+    (Math.random() * newPlatform.height) + 50);
+
+    newEnemy.anims.play('enemyAnim')
+    /*
     const newEnemy = this.add.ball(
       (Math.random() * newPlatform.width) + width,
       (Math.random() * newPlatform.height) + 50,
       30,
       30,
       0xff0000
-      
     );
+    */
 
-    //console.log("new enemy created");
-
+    // add new enemy to group
     world.enemies.add(newEnemy);
-
-    //console.log(world.ground.children.entries);
-
-
-    //debugger;
-
   }
+
+
+
+  /************************************************ 
+  ****************** SHOOTING *********************
+  ************************************************/
+
+
 
   // handle onclick shoot
   this.input.on("pointerdown", function (pointer) {
@@ -226,13 +230,34 @@ module.exports = function update() {
     }
   });
 
-  /*
-  if(world.enemies.children.entries){
-    console.log(world.enemies);
-    debugger;
+  // increment enemy shoot timer
+  world.enemyShootTimer += .1;
 
+  // enemy shoot when reaching timer limit
+  if (world.enemyShootTimer > 8 && world.enemies.children.entries.length > 0){
+    world.enemies.children.entries[0].shoot(player);
+
+    // reset enemy shoot timer
+    world.enemyShootTimer = 0;
   }
-  */
-  //frontEnemy.shoot(player);
+
+
+
+  /************************************************ 
+  *************** SCROLL SPEED ********************
+  ************************************************/
+
+
   
+  //increment scroll speed as game persists
+  world.scrollSpeed -= .1;
+
+  // set ground velocity to new scroll speed
+  world.ground.setVelocityX(world.scrollSpeed);
+
+  // set enemy velocity to new scroll speed
+  world.enemies.setVelocityX(world.scrollSpeed);
+
+
+
 };
