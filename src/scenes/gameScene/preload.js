@@ -63,8 +63,7 @@ module.exports = function preload() {
     // preload water image to game
     this.load.spritesheet("water", water, { frameWidth: 800, frameHeight: 200});
 
-    // preload water image to game
-    this.load.audio("bgMusic", bgMusic);
+
 
 
 
@@ -73,6 +72,9 @@ module.exports = function preload() {
   ************************************************/
 
 
+
+    // preload bg music 
+    this.load.audio("bgMusic", bgMusic);
 
     // preload die audio
     this.load.audio("die", die);

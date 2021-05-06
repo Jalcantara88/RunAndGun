@@ -9,6 +9,8 @@ module.exports = function update() {
 
 
 
+
+
   /************************************************ 
   ******************* WORLD ***********************
   ************************************************/
@@ -64,23 +66,24 @@ module.exports = function update() {
 
   // on event: left arrow
   if (left.isDown) {
-    //(!this.anims.isPlaying || this.anims.key !== 'leftWalk') && 
-    //    this.anims.play('lefttWalk', true);
 
-    player.anims.play('leftWalk',true);
-    //console.log("played animation");
-    //player.left();
+
+    if(player.anims.currentAnim.key !== 'leftWalk') {
+      //console.log(this.anims);
+      player.anims.play('leftWalk', false);
+      console.log("going left");
+    }
+
+    player.left();
   }
 
   // on event: right arrow
   if (right.isDown) {
 
-    //(!this.anims.isPlaying || this.anims.key !== 'rightWalk') && 
-    //    this.anims.play('rightWalk', true);
-
-     player.anims.play('rightWalk',true);
-    //console.log(player.anims.currentAnim.key);
-    
+    if(player.anims.currentAnim.key !== 'rightWalk') {
+      player.anims.play('rightWalk', false);
+      console.log("going right");
+    }
 
     player.right();
   }
@@ -112,9 +115,6 @@ module.exports = function update() {
   
   // on event: land
   if (player.body.touching.down && left.isUp && right.isUp && up.isUp) {
-    //(!this.anims.isPlaying || this.anims.key !== 'turn') && 
-        //this.anims.play('turn', true);
-
     player.turn();
   }
 
@@ -202,16 +202,7 @@ module.exports = function update() {
     const newEnemy = this.add.ball((Math.random() * newPlatform.width) + width,
     (Math.random() * newPlatform.height) + 50);
 
-    newEnemy.anims.play('enemyAnim')
-    /*
-    const newEnemy = this.add.ball(
-      (Math.random() * newPlatform.width) + width,
-      (Math.random() * newPlatform.height) + 50,
-      30,
-      30,
-      0xff0000
-    );
-    */
+    newEnemy.anims.play('enemyAnim', true);
 
     // add new enemy to group
     world.enemies.add(newEnemy);

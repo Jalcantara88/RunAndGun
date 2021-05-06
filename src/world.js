@@ -5,11 +5,7 @@ const world = {
   enemies: undefined,
   enemyShootTimer: 0, 
   enemyBulletsNum: 0,
-//  enemyBullets: undefined,
   scrollSpeed: -300,
-  maxGroundHeight: 200,
-  maxGroundWidth: 400,
-  maxGroundGap: 300,
   lives: 3,
   distance: 0,
   kills: 0,
@@ -24,7 +20,6 @@ const world = {
   minWidth: 200,
   maxWidth: 600,
   randomCalc: false,
-  paused: false,
 };
 
 module.exports = world;

@@ -1,5 +1,4 @@
 const Phaser = require("phaser");
-//const { player } = require("../world");
 
 const LIFESPAN = 1000;
 const SPEED = 1500;
@@ -21,10 +20,7 @@ class Bullet extends Phaser.GameObjects.Ellipse {
   preUpdate() {
     if (!this.initialized) {
       this.scene.physics.moveToObject(this, this.pointer, SPEED);
-      //this.body.collideWorldBounds = true;
-      //this.body.bounce.setTo(0.9, 0.9);
-      this.initialized = true;
-      
+      this.initialized = true;   
     }
   }
 }

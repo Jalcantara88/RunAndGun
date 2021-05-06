@@ -122,13 +122,13 @@ module.exports = function create() {
   //let outside forces effect player
   player.body.immovable = false;
   player.body.setGravityY(500);
-  player.body.setFriction(1);
+  player.body.setFrictionX(1);
 
   // create left walk animation
   this.anims.create({
     key: 'leftWalk',
     frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
-    frameRate: 5,
+    frameRate: 20,
     repeat: -1
   });
 
@@ -142,8 +142,8 @@ module.exports = function create() {
   // create right animation
   this.anims.create({
       key: 'rightWalk',
-      frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-      frameRate: 5,
+      frames: this.anims.generateFrameNumbers('dude', { frames: [5,6,7,8] }),
+      frameRate: 20,
       repeat: -1
   });
 
@@ -151,9 +151,11 @@ module.exports = function create() {
   this.anims.create({
     key: 'enemyAnim',
     frames: this.anims.generateFrameNumbers('enemy',  { start: 0, end: 3 }),
-    frameRate: 10,
+    frameRate: 20,
     repeat: -1,
   });
+
+  player.anims.play("rightWalk");
 
 
  
@@ -181,10 +183,8 @@ module.exports = function create() {
 
   // player to platforms collider
   this.physics.add.collider(player, platforms, function(player) {
-    
-    player.x -= 3;
+    player.body.velocity.x = world.scrollSpeed;
     player.jumpTimer = 0;
-    
   });
 
   // calculate next gap
@@ -213,16 +213,7 @@ module.exports = function create() {
   // spawn enemy
   const target = this.add.ball(700,300);
 
-  target.anims.play('enemyAnim');
-  /*
-  const target = this.add.ball(
-    700,
-    300,
-    30,
-    30,
-    0xff0000
-  );
-  */
+  target.anims.play('enemyAnim', true);
 
   // exclude enemy from world bounds
   target.collideWorlBounds = false;
@@ -234,8 +225,7 @@ module.exports = function create() {
   world.frontEnemy = world.enemies.children.entries[0];
   
   //console.log(world.enemies);
-  this.physics.add.collider(enemies, platforms, function() {
-  });
+  this.physics.add.collider(enemies, platforms);
 
   // bullet and enemy collider
   this.physics.add.overlap(bullets, enemies, hitEnemies, null, this );

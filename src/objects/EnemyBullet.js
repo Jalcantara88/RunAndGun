@@ -1,5 +1,4 @@
 const Phaser = require("phaser");
-const { enemyBulletsNum } = require("../world");
 const world = require("../world");
 
 
@@ -23,10 +22,7 @@ class enemyBullet extends Phaser.GameObjects.Ellipse {
   preUpdate() {
     if (!this.initialized) {
       this.scene.physics.moveToObject(this, this.pointer, SPEED);
-      //this.body.collideWorldBounds = true;
-      //this.body.bounce.setTo(0.9, 0.9);
-      this.initialized = true;
-      
+      this.initialized = true;    
     }
   }
 }

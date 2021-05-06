@@ -5,7 +5,8 @@
   "author": "Julio Alcantara <julio@deadheadstudio.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel serve index.html"
+    "start": "parcel serve index.html",
+    "build": "parcel build index.html --public-url './' --out-dir dist"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
