@@ -64,14 +64,23 @@ module.exports = function update() {
 
   // on event: left arrow
   if (left.isDown) {
-    player.anims.play('leftWalk',true);
+    //(!this.anims.isPlaying || this.anims.key !== 'leftWalk') && 
+    //    this.anims.play('lefttWalk', true);
 
-    player.left();
+    player.anims.play('leftWalk',true);
+    //console.log("played animation");
+    //player.left();
   }
 
   // on event: right arrow
   if (right.isDown) {
-    player.anims.play('rightWalk',true);
+
+    //(!this.anims.isPlaying || this.anims.key !== 'rightWalk') && 
+    //    this.anims.play('rightWalk', true);
+
+     player.anims.play('rightWalk',true);
+    //console.log(player.anims.currentAnim.key);
+    
 
     player.right();
   }
@@ -103,6 +112,9 @@ module.exports = function update() {
   
   // on event: land
   if (player.body.touching.down && left.isUp && right.isUp && up.isUp) {
+    //(!this.anims.isPlaying || this.anims.key !== 'turn') && 
+        //this.anims.play('turn', true);
+
     player.turn();
   }
 
