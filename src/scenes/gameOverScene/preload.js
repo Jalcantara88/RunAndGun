@@ -2,7 +2,7 @@ import bg from '../../assets/bg.png';
 import gameOverBG from '../../assets/gameOverBG.png';
 import replayBtn from '../../assets/replayBtn.png';
 import menuBtn from '../../assets/menuBtn.png';
-import gameOverMusic from '../../assets/music/gameover.mp3';
+import gameOverMusic from '../../assets/music/gameOver.mp3';
 
 module.exports = function preload() {
 
