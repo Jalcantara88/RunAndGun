@@ -1,0 +1,40 @@
+.bg-orange {
+    background-color: #e15944;
+}
+
+.bg-lt-orange {
+    background-color: #f7a77b;
+}
+
+.bg-blue {
+    background-color: #0086bd;
+}
+
+.bg-lt-blue {
+    background-color: #5cb5ea;
+}
+
+.text-blue {
+    color: #0086bd;
+}
+
+.text-orange {
+    color: #e15944
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+.about-font {
+    font-size: 1em;
+}
+
+.text-purple {
+    color: #cc33ff;
+}
+
+.social-img {
+    height: 50px;
+    width: 50px;
+}

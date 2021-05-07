@@ -3,26 +3,82 @@
     <meta charset="UTF-8">
     <meta name="RUN & GUN">
     
-
+    <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body class="bg-dark">
-    <div class="container mt-5">
-      <div class="row justify-content-center pl-5">
-        <div class="col-2">
-          <script class="" src="src/index.js" id="RGgame"></script>
-
+    <div class="container-fluid px-0 mt-5 w-100">
+      <div class="row">
+        <div class="mx-auto">
+          <iframe class="" frameborder="0"   src="./game.html" seamless="seamless" scrolling="no" width="800" height="600" gesture="media" allow="encrypted-media" allowfullscreen>
+            </iframe>
         </div>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-10">
-          <h4 class="bg-primary py-2 text-center text-white mb-0">CONTROLS</h4>
-          <p class="bg-white text-center mt-0">
-            line1 <br/> 
-            line2 <br/>
-            line3
+      <div class="row justify-content-center no-gutters mt-5">
+        <div class=" col-12 mb-0">
+          <h4 class="bg-orange py-2 text-center text-white mb-0 mx-0">CONTROLS</h4>
+          <p class="bg-lt-orange text-center text-dark mt-0 mx-0 py-4 my-0">
+            <strong>MOVE / JUMP</strong> <br/>
+            ARROW KEYS <br/>
+            <strong>SHOOT</strong>  <br />
+            LEFT MOUSE BUTTON
           </p>
         </div>
+
+        <div class=" col-12 mt-0">
+          <h4 class="bg-blue py-2 text-center text-white mb-0 mx-0">DESCRIPTION</h4>
+          <p class="bg-lt-blue text-dark text-center mt-0 mx-0 py-4">
+            <strong>Side Scrolling Action Platformer Infinite Runner!</strong>  <br /> 
+            See how far you can go while dodgine bullets and jumping to the next platform. <br /> 
+            But watch out, the enemies are always spawning and the game scrolls faster and faster! <br/>
+            You only have 3 lives. So get ready to <strong>RUN & GUN</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-10">
+        <h4 class="bg-orange py-2 text-center text-white m-0">ABOUT THE BUILD</h4>
+        <p class="text-center bg-white text-dark m-0 p-5 about-font">
+          This was a project for <strong class="text-purple">MintBean.io</strong>'s <i class="text-blue">Build An Action Game</i> Hack-a-thon / Learn-a-thon! In this, you only get less than one week to build an action game.<br /><br/>
+          This was my first time using <strong class="text-orange">Phaser.JS</strong> for anything. The documentation can be a bit hard to get through, but I was able to get through it with online research. I have worked on game design befor, but only as an Artist. So I had some understanding of the process. This project really helped me hone in on organizing my code and thinking differently to problem solve. I am quite happy with how it turned out and will probably use Phaser again.<br /><br/>
+          The project was built using <strong class="text-orange">Parcel</strong>, this page was styled using <strong class="text-orange">Bootstrap</strong> and deployed onto <strong class="text-orange">Netlify</strong>!<br /> <br/>
+        </p> 
+      </div>
+
+    </div>
+
+    <div class="row justify-content-center mt-5">
+      <div class="col-12">
+        <h4 class="bg-blue py-3 text-center text-white m-0"><strong>JULIO ALCANTARA   </strong>Developer / Designer</h4>
+        <p class="text-center bg-lt-blue text-dark m-0 p-3 pb-2 about-font">
+          <strong class="">I am on a mission to learn to do as many cool things as possible</strong><br/>I love coding, but I also love Art & Design. I strive to find the balance of how these two co-exist.<br/><br/>
+          
+          <!--SOCIAL BAR-->
+        
+        </p>
+        
+          <div class="container-fluid bg-orange pt-1">
+            <p class="text-center text-dark m-0 p-3 pb-2 about-font">
+              <strong class="text-white">MY PERSONAL LINKS</strong><br/>come check me out at my social accounts and send me some love!
+              <!--SOCIAL BAR-->
+            
+            </p>
+              <div class="row">
+                <div class="col-11 col-sm-8 col-md-6 mx-auto p-0">
+                  <!--SOCIAL LINKS-->
+                  <div class="row justify-content-center pt-0 pb-4 pb-md-5 pb-xl-6">
+                    <a class="col" href='https://www.linkedin.com/in/deadheadstudio/'><img class="social-img" src="src/assets/social/linkedin.svg"/></a>
+                    <a class="col" href='https://github.com/Jalcantara88'><img class="social-img" src="src/assets/social/github.svg"/></a>
+                    <a class="col" href='https://www.behance.net/DeadHead'><img class="social-img" src="src/assets/social/behance.svg" /></a>
+                    <a class="col" href='https://www.instagram.com/bone.head.designer/'><img class="social-img" src="src/assets/social/instagram.svg"/></a>
+                    <a class="col" href='https://www.youtube.com/channel/UCzLJQTYgUrhEFAOxt2ek0lg?'><img class="social-img" src="src/assets/social/ytube.svg"/></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        
       </div>
     </div>
 
