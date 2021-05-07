@@ -1,5 +1,5 @@
 const world = require("../../world");
-const Phaser = require("Phaser");
+const Phaser = require("phaser");
 const { width, height } = require("../../constants");
 const { Game } = require("phaser");
 
