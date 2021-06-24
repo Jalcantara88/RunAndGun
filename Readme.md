@@ -1,8 +1,13 @@
 # How to code an action game using PhaserJS
 
-Action games are like candy. The more you eat, the more you want.
+Winning Action Game made for [Mintbean](https://www.mintbean.io)'s Hackathon challenge.
 
-Well... maybe they're not actually like candy. Maybe I just like action games and have a sweet tooth.
+link to deploy [HERE](https://run-and-gun.netlify.app/)
+
+## This game uses
+- PhaserJS
+- Bootstrap
+- Netlify
 
 ## Getting started
 
