@@ -2,6 +2,8 @@
 
 Winning Action Game made for [Mintbean](https://www.mintbean.io)'s Hackathon challenge.
 
+![run and gun](src/assets/run&gun.png)
+
 link to deploy [HERE](https://run-and-gun.netlify.app/)
 
 ## This game uses
