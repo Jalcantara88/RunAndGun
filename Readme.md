@@ -2,7 +2,7 @@
 
 Winning Action Game made for [Mintbean](https://www.mintbean.io)'s Hackathon challenge.
 
-![run and gun](src/assets/run&gun.png)
+![run and gun title screen](src/assets/titleScreen.gif)
 
 link to deploy [HERE](https://run-and-gun.netlify.app/)
 
@@ -10,6 +10,20 @@ link to deploy [HERE](https://run-and-gun.netlify.app/)
 - PhaserJS
 - Bootstrap
 - Netlify
+
+## Info 
+
+Run and Gun is a fast paced infinite runner platformer. Make your way acrros the infinite world while avoiding falling into the river or getting shot by an enemy. See how far you can last and how many baddies you can shoot along the way.
+
+![run and gun gameplay](src/assets/gameplay.gif)
+
+## Controls
+
+#### Arrow Keys
+for moving and jumping
+
+#### Left Mouse Button
+for shooting
 
 ## Getting started
 
