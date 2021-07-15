@@ -20,7 +20,8 @@ class Player extends Phaser.GameObjects.Sprite {
   }
 
   // For some reason, Phaser needs this empty method.
-  preUpdate() {
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
     if (!this.initialized) {
       this.body.collideWorldBounds = false;
       this.body.bounce.setTo(0, 0);
